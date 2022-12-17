@@ -5,7 +5,7 @@ const tasksRouter = express.Router();
 const pool = require('../modules/pool.js');
 
 
-// GET /tasks
+// GET(read) /tasks
 tasksRouter.get('/', (req, res) => {
     console.log('GET tasksRouter');
     let sqlQuery = `
@@ -25,7 +25,29 @@ tasksRouter.get('/', (req, res) => {
         })
 })
 
-// POST
+
+// POST(create) /tasks
+tasksRouter.post('/', (req, res) => {
+    console.log('POST tasksRouter');
+    // set req.body as a more understandable variable
+    let newTask = req.body;
+    console.log('adding task:', newTask);
+
+    let sqlQuery = `
+    INSERT INTO "tasks" ("task", "completed")
+    VALUES ($1, $2);
+    `
+    let sqlValues = [newTask.task, newTask.completed];
+    pool.query(sqlQuery, sqlValues)
+    .then((dbRes) => {
+        res.sendStatus(201);
+    })
+    .catch((dbErr) => {
+        console.log('Error adding newTask', dbErr);
+        res.sendStatus(500);
+    })
+})
+
 
 // DELETE
 
