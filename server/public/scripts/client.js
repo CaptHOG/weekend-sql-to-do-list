@@ -6,6 +6,16 @@ function onReady() {
     $('#addTaskButton').on('click', addTask);
     $('body').on('click', '#deleteTaskButton', deleteTask);
     $('body').on('click', '#completeTaskButton', completeTask);
+    $('body').on('click', '#completeTaskButton', conditionalRenderTask);
+}
+
+// changes background-color to green 
+function conditionalRenderTask(task) {
+    if (task.completed) {
+        return 'class="complete"'
+    } else {
+        return ''
+    }
 }
 
 
@@ -23,7 +33,7 @@ function fetchAndRenderTasks() {
             $('#taskTable').append(`
             <tr data-id=${task.id}>
                 <td>${task.task}</td>
-                <td>${task.completed}</td>
+                <td ${conditionalRenderTask(task)}>${task.completed}</td>
                 <td><button id="deleteTaskButton">Remove</button></td>
                 <td><button id="completeTaskButton">Complete</button></td>
             </tr>
