@@ -27,6 +27,8 @@ function fetchAndRenderTasks() {
             </tr>
             `)
         }
+    }).catch((error) => {
+        console.log('error GET client!', error);
     })
 }
 
@@ -48,7 +50,7 @@ function addTask() {
         console.log(response);
         fetchAndRenderTasks();
     }).catch((error) => {
-        console.log('something wrong in addTask POST!', error);
+        console.log('error POST client!', error);
     })
 }
 
