@@ -5,6 +5,7 @@ function onReady() {
     fetchAndRenderTasks();
     $('#addTaskButton').on('click', addTask);
     $('body').on('click', '#deleteTaskButton', deleteTask);
+    $('body').on('click', '#completeTaskButton', completeTask);
 }
 
 
@@ -16,7 +17,7 @@ function fetchAndRenderTasks() {
         method: 'GET',
         url: '/tasks'
     }).then((response) => {
-        console.log('response from tasksRouter GET', response);
+        console.log('GET response from tasksRouter:', response);
         $('#taskTable').empty();
         for (let task of response) {
             $('#taskTable').append(`
@@ -24,7 +25,7 @@ function fetchAndRenderTasks() {
                 <td>${task.task}</td>
                 <td>${task.completed}</td>
                 <td><button id="deleteTaskButton">Remove</button></td>
-                <td><button>Complete</button></td>
+                <td><button id="completeTaskButton">Complete</button></td>
             </tr>
             `)
         }
@@ -48,18 +49,20 @@ function addTask() {
         url: '/tasks',
         data: taskToSend
     }).then((response) => {
-        console.log(response);
+        console.log('POST client response:', response);
         // bring DOM in sync after POST(create)
         fetchAndRenderTasks();
     }).catch((error) => {
         console.log('error POST client!', error);
     })
+
+    $('#addTaskInput').val('');
 }
 
 
 // DELETE(delete) /tasks
 function deleteTask() {
-    let idToDelete = $(this).parent().parent().data().id
+    let idToDelete = $(this).parent().parent().data().id;
 
     // ajax call to server to DELETE(delete)
     $.ajax({
@@ -75,3 +78,19 @@ function deleteTask() {
 
 
 // PUT(update)
+function completeTask() {
+    let idToUpdate = $(this).parent().parent().data().id;
+
+    $.ajax({
+        // ajax call to server to PUT(update)
+        method: 'PUT',
+        url: `/tasks/${idToUpdate}`,
+        data: {completed: true}
+    }).then((response) => {
+        console.log('PUT response is:', response);
+        // bring DOM in sync after PUT(update)
+        fetchAndRenderTasks();
+    }).catch((error) => {
+        console.log('Error PUT client!', error);
+    })
+}

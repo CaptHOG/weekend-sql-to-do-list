@@ -8,9 +8,10 @@ const pool = require('../modules/pool.js');
 // GET(read) /tasks
 tasksRouter.get('/', (req, res) => {
     console.log('GET tasksRouter');
+
     let sqlQuery = `
     SELECT * FROM "tasks"
-    ORDER BY "id";
+        ORDER BY "id";
     `
     // send query
     pool.query(sqlQuery)
@@ -28,15 +29,13 @@ tasksRouter.get('/', (req, res) => {
 
 // POST(create) /tasks
 tasksRouter.post('/', (req, res) => {
-    console.log('POST tasksRouter');
-    console.log(req.body);
     // set req.body as a more understandable variable
     let newTask = req.body;
-    console.log('adding task:', newTask);
+    console.log('POST tasksRouter:', newTask);
 
     let sqlQuery = `
     INSERT INTO "tasks" ("task", "completed")
-    VALUES ($1, $2);
+        VALUES ($1, $2);
     `
     // objects are shipped around in arrays
     let sqlValues = [newTask.task, newTask.completed];
@@ -62,7 +61,7 @@ tasksRouter.delete('/:id', (req, res) => {
 
     let sqlQuery = `
     DELETE FROM "tasks"
-    WHERE "id"=$1;
+        WHERE "id"=$1;
     `
     // objects are shipped around in arrays
     let sqlValues = [idToDelete];
@@ -80,6 +79,28 @@ tasksRouter.delete('/:id', (req, res) => {
 })
 
 
-// PUT
+// PUT(update)
+tasksRouter.put('/:id', (req, res) => {
+    // id of table row object
+    let idToUpdate = req.params.id;
+    // new value of "completed"
+    let newCompletedValue = req.body.completed;
+
+    let sqlQuery = `
+    UPDATE "tasks"
+        SET "completed"=$1
+        WHERE "id"=$2;
+    `
+    let sqlValues = [newCompletedValue, idToUpdate];
+    // use pg to send query and array of objects
+    pool.query(sqlQuery, sqlValues)
+        .then((dbRes) => {
+            res.sendStatus(200);
+        })
+        .catch((dbErr) => {
+            console.log('Error updating task!', dbErr);
+            res.sendStatus(500);
+        })
+})
 
 module.exports = tasksRouter;
