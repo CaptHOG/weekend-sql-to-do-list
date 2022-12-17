@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weekend SQL To-Do List</title>
     <link rel="stylesheet" href="styles/style.css">
-    <script src="jquery.js"></script>
-    <script src="client.js"></script>
+    <script src="./scripts/jquery.js"></script>
+    <script src="./scripts/client.js"></script>
 </head>
 <body>
     <header>
@@ -17,21 +17,19 @@
         <div class="inputDiv">
             <label for="addTaskInput" id="addTaskInputLabel">Add Task</label>
             <input name="addTaskInput" id="addTaskInput" placeholder="task">
-            <button>Add</button>
+            <button id="addTaskButton">Add</button>
         </div>
         <table>
-            <tr>
-                <th>Task</th>
-                <th>Completed</th>
-                <th>remove task</th>
-                <th>task completed</th>
-            </tr>
-            <tr>
-                <td>Walk the dog</td>
-                <td>false</td>
-                <td><button>Remove</button></td>
-                <td><button>Complete</button></td>
-            </tr>
+            <thead>
+                <tr>
+                    <th id="taskTableHeaderCell">Task</th>
+                    <th>Completed</th>
+                    <th>remove task</th>
+                    <th>task completed</th>
+                </tr>
+            </thead>
+            <tbody id="taskTable">
+            </tbody>
         </table>
     </main>
     <footer>

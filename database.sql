@@ -1,13 +1,13 @@
 CREATE TABLE "tasks" (
 	"id" SERIAL PRIMARY KEY,
 	"task" VARCHAR(50) NOT NULL,
-	"completed" BOOLEAN
+	"completed" BOOLEAN NOT NULL
 );
 
 INSERT INTO "tasks"
 ("task", "completed")
 VALUES
-('Walk the dog', 'y'),
-('Buy groceries', 'n'),
-('Win a puppy', 'n'),
-('Build a snowman', 'y');
+('Walk the dog', true),
+('Buy groceries', false),
+('Win a puppy', false),
+('Build a snowman', true);
