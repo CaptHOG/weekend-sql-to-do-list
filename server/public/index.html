@@ -10,6 +10,32 @@
     <script src="client.js"></script>
 </head>
 <body>
-    <h1>SQL To-Do List</h1>
+    <header>
+        <h1>SQL To-Do List</h1>
+    </header>
+    <main>
+        <div class="inputDiv">
+            <label for="addTaskInput" id="addTaskInputLabel">Add Task</label>
+            <input name="addTaskInput" id="addTaskInput" placeholder="task">
+            <button>Add</button>
+        </div>
+        <table>
+            <tr>
+                <th>Task</th>
+                <th>Completed</th>
+                <th>remove task</th>
+                <th>task completed</th>
+            </tr>
+            <tr>
+                <td>Walk the dog</td>
+                <td>false</td>
+                <td><button>Remove</button></td>
+                <td><button>Complete</button></td>
+            </tr>
+        </table>
+    </main>
+    <footer>
+
+    </footer>
 </body>
 </html>
