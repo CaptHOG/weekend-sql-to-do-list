@@ -4,6 +4,7 @@ function onReady() {
     console.log('DOM ready');
     fetchAndRenderTasks();
     $('#addTaskButton').on('click', addTask);
+    $('body').on('click', '#deleteTaskButton', deleteTask);
 }
 
 
@@ -15,14 +16,14 @@ function fetchAndRenderTasks() {
         method: 'GET',
         url: '/tasks'
     }).then((response) => {
-        console.log('response from tasksRouter', response);
+        console.log('response from tasksRouter GET', response);
         $('#taskTable').empty();
         for (let task of response) {
             $('#taskTable').append(`
-            <tr>
+            <tr data-id=${task.id}>
                 <td>${task.task}</td>
                 <td>${task.completed}</td>
-                <td><button>Remove</button></td>
+                <td><button id="deleteTaskButton">Remove</button></td>
                 <td><button>Complete</button></td>
             </tr>
             `)
@@ -33,7 +34,7 @@ function fetchAndRenderTasks() {
 }
 
 
-// POST(create)
+// POST(create) /tasks
 function addTask() {
     let newTask = $('#addTaskInput').val();
 
@@ -48,6 +49,7 @@ function addTask() {
         data: taskToSend
     }).then((response) => {
         console.log(response);
+        // bring DOM in sync after POST(create)
         fetchAndRenderTasks();
     }).catch((error) => {
         console.log('error POST client!', error);
@@ -55,6 +57,21 @@ function addTask() {
 }
 
 
-// DELETE(delete)
+// DELETE(delete) /tasks
+function deleteTask() {
+    let idToDelete = $(this).parent().parent().data().id
+
+    // ajax call to server to DELETE(delete)
+    $.ajax({
+        method: 'DELETE',
+        url: `/tasks/${idToDelete}`
+    }).then((response) => {
+        // bring DOM in sync after DELETE
+        fetchAndRenderTasks();
+    }).catch((error) => {
+        console.log('error DELETE client!', error);
+    })
+}
+
 
 // PUT(update)
