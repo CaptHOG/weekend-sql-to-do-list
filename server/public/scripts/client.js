@@ -9,15 +9,6 @@ function onReady() {
     $('body').on('click', '#completeTaskButton', conditionalRenderTask);
 }
 
-// changes background-color to green 
-function conditionalRenderTask(task) {
-    if (task.completed) {
-        return 'class="complete"'
-    } else {
-        return ''
-    }
-}
-
 
 // GET(read) and render "tasks" table data
 function fetchAndRenderTasks() {
@@ -30,14 +21,25 @@ function fetchAndRenderTasks() {
         console.log('GET response from tasksRouter:', response);
         $('#taskTable').empty();
         for (let task of response) {
-            $('#taskTable').append(`
-            <tr data-id=${task.id}>
-                <td>${task.task}</td>
-                <td ${conditionalRenderTask(task)}>${task.completed}</td>
-                <td><button id="deleteTaskButton">Remove</button></td>
-                <td><button id="completeTaskButton">Complete</button></td>
-            </tr>
-            `)
+            if (task.completed && task.task) {
+                $('#taskTable').append(`
+                <tr data-id=${task.id}>
+                    <td ${conditionalRenderTask(task)} class="tdCell">${task.task}</td>
+                    <td ${conditionalRenderTask(task)} class="tdCell">${task.completed}</td>
+                    <td><button id="deleteTaskButton">Remove</button></td>
+                    <td></td>
+                </tr>
+                `)
+            } else {
+                $('#taskTable').append(`
+                <tr data-id=${task.id}>
+                    <td ${conditionalRenderTask(task)} class="tdCell">${task.task}</td>
+                    <td ${conditionalRenderTask(task)} class="tdCell">${task.completed}</td>
+                    <td><button id="deleteTaskButton">Remove</button></td>
+                    <td><button id="completeTaskButton">Complete</button></td>
+                </tr>
+                `)
+            }
         }
     }).catch((error) => {
         console.log('error GET client!', error);
@@ -103,4 +105,14 @@ function completeTask() {
     }).catch((error) => {
         console.log('Error PUT client!', error);
     })
+}
+
+// changes background-color to green 
+function conditionalRenderTask(task) {
+    if (task.completed && task.task) {
+        $()
+        return 'id="complete"'
+    } else {
+        return ''
+    }
 }
