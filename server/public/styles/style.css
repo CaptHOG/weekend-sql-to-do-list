@@ -5,10 +5,11 @@ body {
 
 header {
     background-color: rgb(47, 28, 14);
+    margin-bottom: 20px;
 }
 
 h1 {
-    color: rgb(195, 223, 218);
+    color: rgb(162, 255, 238);
     text-align: center;
     padding: 30px;
     margin: 0;
@@ -20,11 +21,25 @@ h1 {
 }
 
 #addTaskInputLabel {
-    font-size: large;
+    font-size: larger;
+    color: rgb(47, 28, 14);
 }
 
 #addTaskInput {
+    margin: 10px;
     padding: 2.5px;
+}
+
+#addTaskButton {
+    background-color: rgb(125, 215, 200);
+    color:rgb(47, 28, 14);
+    border: 1px solid rgb(47, 28, 14);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#addTaskButton:hover {
+    background-color: rgb(162, 255, 238);
 }
 
 table {
@@ -35,7 +50,11 @@ table {
 }
 
 #taskTableHeaderCell {
-    width: 50%;
+    width: 60%;
+}
+
+#completedHeaderCell {
+    width: 5%;
 }
 
 th {
@@ -47,10 +66,52 @@ th {
     text-align: center;
     padding: 10px;
     background-color: bisque;
+    border: 10px solid burlywood;
+    border-radius: 20px;
+}
+
+.tdTaskCell {
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    background-color: bisque;
     border: 5px solid burlywood;
     border-radius: 20px;
 }
 
+button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#deleteTaskButton {
+    background-color: rgb(175, 0, 0);
+    font-size: 10px;
+    padding: 10px;
+    margin: 0;
+    opacity: 0.8;
+    transition: 0.2s;
+}
+
+#deleteTaskButton:hover {
+    background-color: red;
+    opacity: 1;
+}
+
+#completeTaskButton {
+    background-color: rgb(65, 160, 65);
+}
+
+#completeTaskButton:hover {
+    background-color: rgb(99, 219, 99);
+}
+
 #complete {
-    background-color: limegreen;
+    background-color: rgb(99, 219, 99);
 }

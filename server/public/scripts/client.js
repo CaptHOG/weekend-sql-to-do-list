@@ -6,7 +6,6 @@ function onReady() {
     $('#addTaskButton').on('click', addTask);
     $('body').on('click', '#deleteTaskButton', deleteTask);
     $('body').on('click', '#completeTaskButton', completeTask);
-    $('body').on('click', '#completeTaskButton', conditionalRenderTask);
 }
 
 
@@ -22,20 +21,22 @@ function fetchAndRenderTasks() {
         $('#taskTable').empty();
         for (let task of response) {
             if (task.completed && task.task) {
+                task.completed = 'Yes!';
                 $('#taskTable').append(`
                 <tr data-id=${task.id}>
-                    <td ${conditionalRenderTask(task)} class="tdCell">${task.task}</td>
-                    <td ${conditionalRenderTask(task)} class="tdCell">${task.completed}</td>
                     <td><button id="deleteTaskButton">Remove</button></td>
+                    <td id="complete" class="tdTaskCell" class="tdCell">${task.task}</td>
+                    <td id="complete" class="tdCell">${task.completed}</td>
                     <td></td>
                 </tr>
                 `)
             } else {
+                task.completed = 'Not Yet';
                 $('#taskTable').append(`
                 <tr data-id=${task.id}>
-                    <td ${conditionalRenderTask(task)} class="tdCell">${task.task}</td>
-                    <td ${conditionalRenderTask(task)} class="tdCell">${task.completed}</td>
                     <td><button id="deleteTaskButton">Remove</button></td>
+                    <td class="tdTaskCell" class="tdCell">${task.task}</td>
+                    <td class="tdCell">${task.completed}</td>
                     <td><button id="completeTaskButton">Complete</button></td>
                 </tr>
                 `)
@@ -105,14 +106,4 @@ function completeTask() {
     }).catch((error) => {
         console.log('Error PUT client!', error);
     })
-}
-
-// changes background-color to green 
-function conditionalRenderTask(task) {
-    if (task.completed && task.task) {
-        $()
-        return 'id="complete"'
-    } else {
-        return ''
-    }
 }

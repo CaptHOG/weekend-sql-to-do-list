@@ -1,6 +1,6 @@
 CREATE TABLE "tasks" (
 	"id" SERIAL PRIMARY KEY,
-	"task" VARCHAR(50) NOT NULL,
+	"task" VARCHAR(80) NOT NULL,
 	"completed" BOOLEAN NOT NULL
 );
 
