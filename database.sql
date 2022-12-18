@@ -10,4 +10,5 @@ VALUES
 ('Walk the dog', true),
 ('Buy groceries', false),
 ('Win a puppy', false),
-('Build a snowman', true);
+('Build a snowman', true),
+('Do laundry', false);

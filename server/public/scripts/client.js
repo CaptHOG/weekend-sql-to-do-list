@@ -76,7 +76,6 @@ function addTask() {
 // DELETE(delete) /tasks
 function deleteTask() {
     let idToDelete = $(this).parent().parent().data().id;
-
     // ajax call to server to DELETE(delete)
     $.ajax({
         method: 'DELETE',
