@@ -1,6 +1,7 @@
 body {
     background-color: burlywood;
     margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 header {
@@ -88,6 +89,9 @@ button {
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
+    font-family: monospace;
+    border: 1px solid rgb(47, 28, 14);
+    border-radius: 5px;
 }
 
 #deleteTaskButton {
