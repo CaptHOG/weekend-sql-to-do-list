@@ -1,6 +1,6 @@
 # CRUD To-Do List
 
-![to do gif](server/public/images/sql-to-do-list-video.gif)
+(server/public/images/sql-to-do-list-video.gif)
 
 [Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
 
